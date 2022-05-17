@@ -23,6 +23,7 @@ public class Chat {
     //Studyroom FK
     @OneToOne(targetEntity = StudyRoom.class)
     @JoinColumn(name = "studyroomNo")
+    @Column(nullable = false)
     private StudyRoom studyroom;
 
     //발신자 아이디

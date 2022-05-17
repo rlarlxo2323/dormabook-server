@@ -24,6 +24,7 @@ public class Notice {
     // 신청서 번호(인덱스)
     @OneToOne(targetEntity = Application.class)
     @JoinColumn(name = "applicationNo")
+    @Column(nullable = false)
     private Application application;
 
     // 신청한 날짜

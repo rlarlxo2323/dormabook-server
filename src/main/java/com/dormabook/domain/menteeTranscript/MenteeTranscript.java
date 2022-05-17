@@ -22,6 +22,7 @@ public class MenteeTranscript {
     // 학습실 번호(인덱스)
     @OneToOne(targetEntity = StudyRoom.class)
     @JoinColumn(name = "studyroomNo")
+    @Column(nullable = false)
     private StudyRoom studyroom;
 
     // 파일 원본 이름

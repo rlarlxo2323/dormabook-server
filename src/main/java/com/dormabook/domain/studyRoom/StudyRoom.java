@@ -23,6 +23,7 @@ public class StudyRoom {
     // 팀 번호(인덱스)
     @OneToOne(targetEntity = Team.class)
     @JoinColumn(name = "teamNo")
+    @Column(nullable = false)
     private Team team;
 
     // 도메인 주소

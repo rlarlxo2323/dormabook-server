@@ -23,6 +23,7 @@ public class Report {
     // 학습실 번호(인덱스)
     @ManyToOne(targetEntity = StudyRoom.class)
     @JoinColumn(name = "studyroomNo")
+    @Column(nullable = false)
     private StudyRoom studyroom;
 
     // 파일 원본 이름

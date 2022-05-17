@@ -24,6 +24,7 @@ public class Post {
     // 작성자(회원)아이디
     @ManyToOne(targetEntity = Member.class)
     @JoinColumn(name = "memberId")
+    @Column(nullable = false)
     private Member member;
 
     // 과목

@@ -22,6 +22,7 @@ public class ChatFile {
     //StudyRoom FK
     @ManyToOne(targetEntity = StudyRoom.class)
     @JoinColumn(name = "studyroomNo")
+    @Column(nullable = false)
     private StudyRoom studyroom;
 
     //파일 원본 이름
