@@ -21,8 +21,7 @@ public class BookImage {
 
     // 게시글 번호(인덱스)
     @ManyToOne(targetEntity = Post.class)
-    @JoinColumn(name = "postNo")
-    @Column(nullable = false)
+    @JoinColumn(name = "postNo", nullable = false)
     private Post post;
 
     // 사진원본 파일명

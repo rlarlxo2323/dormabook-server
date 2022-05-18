@@ -1,4 +1,4 @@
-package com.dormabook.domain.Notice;
+package com.dormabook.domain.notice;
 
 import com.dormabook.domain.application.Application;
 import lombok.Builder;
@@ -23,8 +23,7 @@ public class Notice {
 
     // 신청서 번호(인덱스)
     @OneToOne(targetEntity = Application.class)
-    @JoinColumn(name = "applicationNo")
-    @Column(nullable = false)
+    @JoinColumn(name = "applicationNo", nullable = false)
     private Application application;
 
     // 신청한 날짜

@@ -1,6 +1,5 @@
-package com.dormabook.domain.studyRoom;
+package com.dormabook.domain.studyroom;
 
-import com.dormabook.domain.post.Post;
 import com.dormabook.domain.team.Team;
 import lombok.Builder;
 import lombok.Getter;
@@ -22,8 +21,7 @@ public class StudyRoom {
 
     // 팀 번호(인덱스)
     @OneToOne(targetEntity = Team.class)
-    @JoinColumn(name = "teamNo")
-    @Column(nullable = false)
+    @JoinColumn(name = "teamNo", nullable = false)
     private Team team;
 
     // 도메인 주소
@@ -31,7 +29,6 @@ public class StudyRoom {
     private String studyroomdomainaddr;
 
     // 멘티성적
-
     private String studyroomMenteegrade;
 
     // 과목

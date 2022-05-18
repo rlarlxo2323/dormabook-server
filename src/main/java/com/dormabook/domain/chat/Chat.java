@@ -1,6 +1,6 @@
 package com.dormabook.domain.chat;
 
-import com.dormabook.domain.studyRoom.StudyRoom;
+import com.dormabook.domain.studyroom.StudyRoom;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,8 +22,7 @@ public class Chat {
 
     //Studyroom FK
     @OneToOne(targetEntity = StudyRoom.class)
-    @JoinColumn(name = "studyroomNo")
-    @Column(nullable = false)
+    @JoinColumn(name = "studyroomNo", nullable = false)
     private StudyRoom studyroom;
 
     //발신자 아이디

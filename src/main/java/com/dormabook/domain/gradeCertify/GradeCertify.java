@@ -39,8 +39,7 @@ public class GradeCertify {
 
     // 게시글 번호(인덱스)
     @OneToOne(targetEntity = Post.class)
-    @JoinColumn(name = "postNo")
-    @Column(nullable = false)
+    @JoinColumn(name = "postNo", nullable = false)
     private Post post;
 
     @Builder

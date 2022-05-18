@@ -26,8 +26,7 @@ public class Application {
 
     // 게시글 번호(인덱스)
     @ManyToOne(targetEntity = Post.class)
-    @JoinColumn(name = "postNo")
-    @Column(nullable = false)
+    @JoinColumn(name = "postNo", nullable = false)
     private Post post;
 
     // 신청서 수락 여부 0:미수락, 1:수락

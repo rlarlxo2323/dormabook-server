@@ -1,7 +1,6 @@
 package com.dormabook.domain.report;
 
-import com.dormabook.domain.studyRoom.StudyRoom;
-import com.dormabook.domain.team.Team;
+import com.dormabook.domain.studyroom.StudyRoom;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,8 +21,7 @@ public class Report {
 
     // 학습실 번호(인덱스)
     @ManyToOne(targetEntity = StudyRoom.class)
-    @JoinColumn(name = "studyroomNo")
-    @Column(nullable = false)
+    @JoinColumn(name = "studyroomNo", nullable = false)
     private StudyRoom studyroom;
 
     // 파일 원본 이름

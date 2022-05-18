@@ -1,6 +1,6 @@
 package com.dormabook.domain.chatFile;
 
-import com.dormabook.domain.studyRoom.StudyRoom;
+import com.dormabook.domain.studyroom.StudyRoom;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,8 +21,7 @@ public class ChatFile {
 
     //StudyRoom FK
     @ManyToOne(targetEntity = StudyRoom.class)
-    @JoinColumn(name = "studyroomNo")
-    @Column(nullable = false)
+    @JoinColumn(name = "studyroomNo", nullable = false)
     private StudyRoom studyroom;
 
     //파일 원본 이름
