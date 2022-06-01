@@ -20,9 +20,4 @@ public class HomeController {
     public String admin() {
         return "admin";
     }
-
-    @GetMapping("")
-    public String test(){
-        return "C:\\Users\\anht0\\Downloads\\style\\login.html";
-    }
 }
