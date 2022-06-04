@@ -6,6 +6,7 @@ import com.dormabook.security.JwtTokenProvider;
 import com.dormabook.security.MemberDetailsImpl;
 import com.dormabook.web.dto.member.JwtRequestDto;
 import com.dormabook.web.dto.member.JwtResponseDto;
+import com.dormabook.web.dto.member.MemberIdRequestDto;
 import com.dormabook.web.dto.member.MemberSignupRequestDto;
 import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -32,13 +33,26 @@ public class AuthService {
         boolean existMember = memberRepository.existsById(request.getMemberId());
 
         // 이미 회원이 존재하는 경우
-        if (existMember) return null;
+        if (existMember) {
+            return "exist";
+        }else {
+            Member member = new Member(request);
+            member.encryptPassword(passwordEncoder);
 
-        Member member = new Member(request);
-        member.encryptPassword(passwordEncoder);
+            memberRepository.save(member);
+            return member.getMemberId();
+        }
+    }
 
-        memberRepository.save(member);
-        return member.getMemberId();
+    public String checkId(MemberIdRequestDto request){
+        boolean existMember = memberRepository.existsById(request.getMemberId());
+
+        // 이미 회원이 존재하는 경우
+        if (existMember) {
+            return "exist";
+        } else {
+            return null;
+        }
     }
 
     public JwtResponseDto login(JwtRequestDto request) throws Exception {

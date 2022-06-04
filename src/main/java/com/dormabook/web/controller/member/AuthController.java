@@ -3,6 +3,7 @@ package com.dormabook.web.controller.member;
 import com.dormabook.service.member.AuthService;
 import com.dormabook.web.dto.member.JwtRequestDto;
 import com.dormabook.web.dto.member.JwtResponseDto;
+import com.dormabook.web.dto.member.MemberIdRequestDto;
 import com.dormabook.web.dto.member.MemberSignupRequestDto;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
@@ -15,9 +16,14 @@ public class AuthController {
 
     private final AuthService authService;
 
-    @PostMapping(value = "signup", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "signup")
     public String signup(@RequestBody MemberSignupRequestDto request){
         return authService.signup(request);
+    }
+
+    @PostMapping(value = "signup/checkid")
+    public String checkId(@RequestBody MemberIdRequestDto request){
+        return authService.checkId(request);
     }
 
     @PostMapping(value = "login", produces = MediaType.APPLICATION_JSON_VALUE)
