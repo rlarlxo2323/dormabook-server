@@ -40,4 +40,7 @@ dependencies {
     implementation('org.springframework.boot:spring-boot-starter-security')
     //jwt
     implementation('io.jsonwebtoken:jjwt:0.9.1')
+    //sms
+    implementation('org.apache.httpcomponents:httpcore:4.4.6')
+    implementation('org.apache.httpcomponents:httpclient:4.5.11')
 }

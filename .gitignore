@@ -24,3 +24,6 @@ hs_err_pid*
 
 # aws 설정 정보
 application-aws.properties
+
+# ncloud sms api 설정 정보
+application-sms.properties

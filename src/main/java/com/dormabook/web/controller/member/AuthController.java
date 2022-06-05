@@ -1,10 +1,8 @@
 package com.dormabook.web.controller.member;
 
 import com.dormabook.service.member.AuthService;
-import com.dormabook.web.dto.member.JwtRequestDto;
-import com.dormabook.web.dto.member.JwtResponseDto;
-import com.dormabook.web.dto.member.MemberIdRequestDto;
-import com.dormabook.web.dto.member.MemberSignupRequestDto;
+import com.dormabook.web.dto.member.*;
+import io.jsonwebtoken.Jwt;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +22,21 @@ public class AuthController {
     @PostMapping(value = "signup/checkid")
     public String checkId(@RequestBody MemberIdRequestDto request){
         return authService.checkId(request);
+    }
+
+    @PostMapping(value = "searchid")
+    public String searchId(@RequestBody MemberSearchRequestDto request){
+        return authService.searchId(request);
+    }
+
+    @PostMapping(value = "searchpw")
+    public String searchPw(@RequestBody MemberSearchRequestDto request){
+        return authService.searchPw(request);
+    }
+
+    @PostMapping(value = "modifypw")
+    public int modifyPw(@RequestBody JwtRequestDto request){
+        return authService.modifyPw(request);
     }
 
     @PostMapping(value = "login", produces = MediaType.APPLICATION_JSON_VALUE)

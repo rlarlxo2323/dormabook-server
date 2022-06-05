@@ -4,10 +4,7 @@ import com.dormabook.domain.member.Member;
 import com.dormabook.domain.member.MemberRepository;
 import com.dormabook.security.JwtTokenProvider;
 import com.dormabook.security.MemberDetailsImpl;
-import com.dormabook.web.dto.member.JwtRequestDto;
-import com.dormabook.web.dto.member.JwtResponseDto;
-import com.dormabook.web.dto.member.MemberIdRequestDto;
-import com.dormabook.web.dto.member.MemberSignupRequestDto;
+import com.dormabook.web.dto.member.*;
 import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -53,6 +50,23 @@ public class AuthService {
         } else {
             return null;
         }
+    }
+
+    public String searchId(MemberSearchRequestDto request){
+
+        return memberRepository.findIdByName(request.getMemberName(), request.getMemberPhone());
+    }
+
+    public String searchPw(MemberSearchRequestDto request){
+
+        return memberRepository.findPwById(request.getMemberName(), request.getMemberPhone(), request.getMemberId());
+    }
+
+    public int modifyPw(JwtRequestDto request){
+
+        String encodePwd = passwordEncoder.encode(request.getMemberPwd());
+
+        return memberRepository.modifyPwById(request.getMemberId(), encodePwd);
     }
 
     public JwtResponseDto login(JwtRequestDto request) throws Exception {
