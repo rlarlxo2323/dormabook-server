@@ -31,10 +31,14 @@ hs_err_pid*
 .idea
 .idea/*.xml*
 .iml
+.iws
 out
 gen
 build
 rebel.xml
+
+# Mac
+.DS_Store
 
 # aws 설정 정보
 application-aws.properties

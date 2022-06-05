@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="SshConfigs">
-    <configs>
-      <sshConfig host="3.39.239.199" id="27063f45-0f1d-414a-9e9b-f3f9240d18bb" keyPath="C:\Users\KING\Desktop\serverkey\frontkey\dormabook_server.pem" port="22" nameFormat="DESCRIPTIVE" username="ubuntu" />
-    </configs>
-  </component>
-</project>
