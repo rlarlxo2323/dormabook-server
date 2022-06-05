@@ -22,6 +22,20 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 
+# Gradle
+.gradle
+/build
+.gradletasknamecache
+
+# IntelliJ project files
+.idea
+.idea/*.xml*
+.iml
+out
+gen
+build
+rebel.xml
+
 # aws 설정 정보
 application-aws.properties
 
