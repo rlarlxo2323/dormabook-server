@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
+import java.sql.Date;
 
 @Getter
 @Entity
@@ -36,12 +37,20 @@ public class Report {
     @Column(nullable = false)
     private String reportSavefilename;
 
+    @Column(nullable = false)
+    private Date reportSaveat;
+
+    @Column(nullable = false)
+    private String reportDownload;
+
     @Builder
-    public Report(Long reportNo, StudyRoom studyroom, String reportFilename, String reportFileroute, String reportSavefilename) {
+    public Report(Long reportNo, StudyRoom studyroom, String reportFilename, String reportFileroute, String reportSavefilename, Date reportSaveat, String reportDownload) {
         this.reportNo = reportNo;
         this.studyroom = studyroom;
         this.reportFilename = reportFilename;
         this.reportFileroute = reportFileroute;
         this.reportSavefilename = reportSavefilename;
+        this.reportSaveat = reportSaveat;
+        this.reportDownload = reportDownload;
     }
 }
