@@ -9,12 +9,13 @@ import java.sql.Timestamp;
 @Getter
 @AllArgsConstructor
 public class PostListResponseDto {
-
+    private Long postNo;
     private String postTitle;
     private int postMatchState;
     private Timestamp postCreatedAt;
 
     public PostListResponseDto(Post entity) {
+        this.postNo = entity.getPostNo();
         this.postTitle = entity.getPostTitle();
         this.postMatchState = entity.getPostMatchState();
         this.postCreatedAt = entity.getPostCreatedAt();

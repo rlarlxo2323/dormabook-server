@@ -26,14 +26,16 @@ public class PostController {
         return postService.findByPostList(postRule);
     }
 
+    //전체 게시글 조회
     @GetMapping("/post_list/all")
     public List<PostListResponseDto> findByAllPostList(){
         return postService.findByAllPostList();
     }
 
-//    @GetMapping("/community/mento_postlist")
-//    public List<PostByCommunityResponseDto> findByMentoPostList(@RequestParam("postRule")String postRule){
-//
-//        return postService.findByPostList(postRule);
-//    }
+    //멘토 멘티 게시글만 역할에 따라 조회
+    @GetMapping("/post_list")
+    public List<PostListResponseDto> findByRolePostList(@RequestParam("postRule")String postRule){
+
+        return postService.findByRolePostList(postRule);
+    }
 }

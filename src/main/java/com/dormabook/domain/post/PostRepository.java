@@ -16,6 +16,10 @@ public interface PostRepository extends JpaRepository<Post, Long> {
 
 
     //모든 게시글 조회
-    @Query(nativeQuery = true,value = "select * from post")
+    @Query(nativeQuery = true,value = "select * from post order by post_created_at desc")
     List<Post> findByAllPostList();
+
+    //멘티 멘토 게시글만 조회
+    @Query(nativeQuery = true,value = "select * from post where post_role =:postRole order by post_created_at desc")
+    List<Post> findByRolePostList(@Param("postRole")String postRole);
 }

@@ -21,7 +21,7 @@ public class Chat {
     private Long chatNo;
 
     //Studyroom FK
-    @OneToOne(targetEntity = StudyRoom.class)
+    @ManyToOne(targetEntity = StudyRoom.class)
     @JoinColumn(name = "studyroomNo", nullable = false)
     private StudyRoom studyroom;
 

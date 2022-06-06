@@ -30,4 +30,11 @@ public class PostService {
                 .map(PostListResponseDto::new)
                 .collect(Collectors.toList());
     }
+
+    public List<PostListResponseDto> findByRolePostList(String postRule){
+        return postRepository.findByRolePostList(postRule)
+                .stream()
+                .map(PostListResponseDto::new)
+                .collect(Collectors.toList());
+    }
 }
