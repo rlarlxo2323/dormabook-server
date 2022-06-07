@@ -43,4 +43,7 @@ dependencies {
     //sms
     implementation('org.apache.httpcomponents:httpcore:4.4.6')
     implementation('org.apache.httpcomponents:httpclient:4.5.11')
+
+    //이미지 업로드 관련
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
 }
