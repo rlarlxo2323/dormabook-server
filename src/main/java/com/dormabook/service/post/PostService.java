@@ -6,13 +6,10 @@ import com.dormabook.domain.post.PostRepository;
 import com.dormabook.domain.team.TeamRepository;
 import com.dormabook.security.JwtTokenProvider;
 import com.dormabook.web.dto.post.*;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import org.springframework.core.io.Resource;
@@ -39,10 +36,11 @@ public class PostService {
     JwtTokenProvider jwtTokenProvider;
 
     @Autowired
-    public PostService(PostFileStorageProperties postFileStorageProperties, PostRepository postRepository) {
+    public PostService(PostFileStorageProperties postFileStorageProperties, PostRepository postRepository, TeamRepository teamRepository) {
         this.postRepository = postRepository;
         this.fileStorageLocation = Paths.get(postFileStorageProperties.getUploadDir())
                 .toAbsolutePath().normalize();
+        this.teamRepository = teamRepository;
 
         try {
             Files.createDirectories(this.fileStorageLocation);

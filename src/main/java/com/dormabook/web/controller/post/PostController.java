@@ -8,7 +8,6 @@ import com.dormabook.service.bookImage.BookImageService;
 import com.dormabook.service.member.MemberService;
 import com.dormabook.security.JwtTokenProvider;
 import com.dormabook.service.post.PostService;
-import com.dormabook.web.dto.bookImage.BookImageRequestDto;
 import com.dormabook.web.dto.bookImage.BookImageResponseDto;
 import com.dormabook.web.dto.bookImage.BookImageSaveRequestDto;
 import com.dormabook.web.dto.mentorTranscript.MentorTranscriptResponseDto;
@@ -18,17 +17,12 @@ import lombok.RequiredArgsConstructor;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.awt.*;
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @RestController

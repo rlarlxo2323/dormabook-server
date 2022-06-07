@@ -1,8 +1,5 @@
 package com.dormabook.domain.post;
 
-import com.dormabook.web.dto.post.GetClassListResponse;
-import com.dormabook.web.dto.post.GetClassListResponseDto;
-import com.dormabook.web.dto.post.UploadPostResponse;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
