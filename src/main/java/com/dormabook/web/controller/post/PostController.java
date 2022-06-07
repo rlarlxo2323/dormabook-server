@@ -6,6 +6,7 @@ import com.dormabook.domain.post.PostFileStorageProperties;
 import com.dormabook.service.MentorTranscript.MentorTranscriptService;
 import com.dormabook.service.bookImage.BookImageService;
 import com.dormabook.service.member.MemberService;
+import com.dormabook.security.JwtTokenProvider;
 import com.dormabook.service.post.PostService;
 import com.dormabook.web.dto.bookImage.BookImageRequestDto;
 import com.dormabook.web.dto.bookImage.BookImageResponseDto;
@@ -14,15 +15,20 @@ import com.dormabook.web.dto.mentorTranscript.MentorTranscriptResponseDto;
 import com.dormabook.web.dto.mentorTranscript.MentorTranscriptSaveRequestDto;
 import com.dormabook.web.dto.post.*;
 import lombok.RequiredArgsConstructor;
+import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.awt.*;
+import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @RestController
@@ -31,6 +37,9 @@ public class PostController {
 
     @Autowired
     PostService postService;
+
+    @Autowired
+    JwtTokenProvider jwtTokenProvider;
 
     @Autowired
     BookImageService bookImageService;
@@ -67,25 +76,8 @@ public class PostController {
     @GetMapping("/mentee_post")
     public Post findByMenteePost(@RequestParam("postNo") Long postNo) {
         Post p = postService.findByMenteePost(postNo);
-//        System.out.println(p.getPostTitle());
-//        System.out.println(p.getMember().getMemberName());
-//        System.out.println(p.getPostContent());
-//        System.out.println(p.getPostMatchState());
-//        System.out.println(p.getPostCreatedAt());
         return p;
     }
-
-//
-//    @PostMapping("/mento_post/upload/post")
-//    public String mentoPostUpload(@RequestBody UploadPostRequestDto dto, @RequestParam("file") MultipartFile file) {
-//        String ok = postService.mentoPostUpload(postService.save(dto).getPostNo(), file);
-////        String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-////                .path("/downloadFile/")
-////                .path(fileName)
-////                .toUriString();
-//
-//        return "redirect:/";
-//    }
 
     @PostMapping(value = "/mento_post/upload/post", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
     public String mentoPostUpload(@RequestPart UploadPostRequestDto dto,
@@ -128,5 +120,27 @@ public class PostController {
         String test = responseDto.getBookImageRoute();
         String test2 = responseDto2.getMentoSaveImageName();
         return test+" + 경로에 이미지 저장됨 \n" +test2 + "경로에 성적증명서 저장됨";
+    }
+
+    @GetMapping("/community/mypage/postlist")
+    public List<PostListResponseDto> findByPostList(HttpServletRequest request){
+
+        String jwt = jwtTokenProvider.resolveToken(request);
+        val jwtToken = jwt.substring(7);
+
+        String userId = postService.findByIdJwt(jwtToken);
+
+        return postService.findByIdPostList(userId);
+    }
+
+    @GetMapping("/community/mypage/classlist")
+    public List<GetClassListResponse> findByClassList(HttpServletRequest request){
+
+        String jwt = jwtTokenProvider.resolveToken(request);
+        val jwtToken = jwt.substring(7);
+
+        String userId = postService.findByIdJwt(jwtToken);
+
+        return postService.findByIdClassList(userId);
     }
 }

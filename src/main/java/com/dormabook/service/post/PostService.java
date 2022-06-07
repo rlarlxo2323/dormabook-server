@@ -3,9 +3,12 @@ package com.dormabook.service.post;
 import com.dormabook.domain.post.Post;
 import com.dormabook.domain.post.PostFileStorageProperties;
 import com.dormabook.domain.post.PostRepository;
+import com.dormabook.domain.team.TeamRepository;
+import com.dormabook.security.JwtTokenProvider;
 import com.dormabook.web.dto.post.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -25,12 +28,15 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-//@RequiredArgsConstructor
 @Service
 public class PostService {
 
     private final PostRepository postRepository;
     private final Path fileStorageLocation;
+    private final TeamRepository teamRepository;
+
+    @Autowired
+    JwtTokenProvider jwtTokenProvider;
 
     @Autowired
     public PostService(PostFileStorageProperties postFileStorageProperties, PostRepository postRepository) {
@@ -88,7 +94,6 @@ public class PostService {
         }
     }
 
-
     public List<PostByCommunityResponseDto> findByPostList(String postRule) {
         return postRepository.findByPostList(postRule)
                 .stream()
@@ -114,4 +119,21 @@ public class PostService {
         return postRepository.findByMenteePost(postNo);
     }
 
+
+    public List<PostListResponseDto> findByIdPostList(String userId){
+
+        return postRepository.findByIdPostList(userId)
+                .stream()
+                .map(PostListResponseDto::new)
+                .collect(Collectors.toList());
+    }
+
+    public List<GetClassListResponse> findByIdClassList(String userId){
+
+        return teamRepository.findByIdClassList(userId);
+    }
+
+    public String findByIdJwt(String jwt){
+        return jwtTokenProvider.getAuthentication(jwt).getName();
+    }
 }
