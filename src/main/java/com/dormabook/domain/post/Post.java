@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
@@ -12,6 +13,7 @@ import java.sql.Timestamp;
 
 @Getter
 @Entity
+@DynamicInsert
 @NoArgsConstructor
 @Component
 public class Post {
@@ -53,7 +55,8 @@ public class Post {
     private String postBookTitle;
 
     // 작성일자
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "TIMESTAMP")
+    @ColumnDefault("CURRENT_TIMESTAMP")
     private Timestamp postCreatedAt;
 
     // 글내용

@@ -1,5 +1,6 @@
 package com.dormabook.domain.post;
 
+import com.dormabook.web.dto.post.UploadPostResponse;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -22,4 +23,13 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     //멘티 멘토 게시글만 조회
     @Query(nativeQuery = true,value = "select * from post where post_role =:postRole order by post_created_at desc")
     List<Post> findByRolePostList(@Param("postRole")String postRole);
+
+    //멘티 게시글 단건 조회
+    @Query("select p from Post p join fetch p.member where p.postNo =:postNo")
+    Post findByMenteePost(@Param("postNo")Long postNo);
+
+
+
 }
+
+
