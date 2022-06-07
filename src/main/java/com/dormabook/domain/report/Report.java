@@ -43,7 +43,7 @@ public class Report {
     @ColumnDefault("CURRENT_TIMESTAMP")
     private Timestamp reportSaveat;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "LONGTEXT")
     private String reportDownload;
 
     @Builder
