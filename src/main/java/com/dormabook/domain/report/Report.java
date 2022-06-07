@@ -4,10 +4,12 @@ import com.dormabook.domain.studyroom.StudyRoom;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.ColumnDefault;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.sql.Timestamp;
 
 @Getter
 @Entity
@@ -37,14 +39,15 @@ public class Report {
     @Column(nullable = false)
     private String reportSavefilename;
 
-    @Column(nullable = false)
-    private Date reportSaveat;
+    @Column(nullable = false, columnDefinition = "TIMESTAMP")
+    @ColumnDefault("CURRENT_TIMESTAMP")
+    private Timestamp reportSaveat;
 
     @Column(nullable = false)
     private String reportDownload;
 
     @Builder
-    public Report(Long reportNo, StudyRoom studyroom, String reportFilename, String reportFileroute, String reportSavefilename, Date reportSaveat, String reportDownload) {
+    public Report(Long reportNo, StudyRoom studyroom, String reportFilename, String reportFileroute, String reportSavefilename, Timestamp reportSaveat, String reportDownload) {
         this.reportNo = reportNo;
         this.studyroom = studyroom;
         this.reportFilename = reportFilename;

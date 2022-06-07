@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 @Getter
 @NoArgsConstructor
@@ -16,10 +17,10 @@ public class ReportRequestDto {
     private String reportFilename;
     private String reportFileroute;
     private String reportSavefilename;
-    private Date reportSaveat;
+    private Timestamp reportSaveat;
     private String reportDownload;
 
-    public ReportRequestDto(Long reportNo, StudyRoom studyroom, String reportFilename, String reportFileroute, String reportSavefilename, Date reportSaveat, String reportDownload) {
+    public ReportRequestDto(Long reportNo, StudyRoom studyroom, String reportFilename, String reportFileroute, String reportSavefilename, Timestamp reportSaveat, String reportDownload) {
         this.reportNo = reportNo;
         this.studyroom = studyroom;
         this.reportFilename = reportFilename;
