@@ -22,8 +22,8 @@ public class Application extends SpringBootServletInitializer {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-//                registry.addMapping("/**").allowedOrigins("https://dormabook.shop"); //서버 올릴 때 변경
-                registry.addMapping("/**").allowedOrigins("http://localhost:63342");
+                registry.addMapping("/**").allowedOrigins("https://dormabook.shop"); //서버 올릴 때 변경
+//                registry.addMapping("/**").allowedOrigins("http://localhost:63342");
             }
         };
     }
