@@ -4,8 +4,11 @@ import com.dormabook.domain.application.Application;
 import com.dormabook.domain.application.ApplicationRepository;
 import com.dormabook.web.dto.application.ApplicationResponseDto;
 import com.dormabook.web.dto.application.ApplicationSaveRequestDto;
+import com.dormabook.web.dto.application.GetAppContentResponse;
+import com.dormabook.web.dto.application.GetApplicationResponse;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
