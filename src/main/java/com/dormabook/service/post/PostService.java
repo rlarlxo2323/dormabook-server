@@ -106,7 +106,7 @@ public class PostService {
                 .collect(Collectors.toList());
     }
 
-    //postNo와 postRole로 게시글 정보 불러오기 -> 멘토게시글인지 멘티게시글인지 구별
+    //postNo
     public GetPostClassResponse findByPostClass(Long postNo){
         return postRepository.findByPostClass(postNo);
     }

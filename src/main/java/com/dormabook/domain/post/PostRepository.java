@@ -38,7 +38,7 @@ public interface PostRepository extends JpaRepository<Post, Long> {
             "       m.member_name as memberName, b.book_saveimagename as bookSaveimagename, b.bookimage_route as bookimageRoute\n" +
             "from post as p\n" +
             "    join member m on p.member_id = m.member_id\n" +
-            "    join book_image b on p.post_no = b.post_no\n" +
+            "    left outer join book_image b on p.post_no = b.post_no\n" +
             "where p.post_no=:postNo")
     GetPostClassResponse findByPostClass(@Param("postNo")Long postNo);
 
