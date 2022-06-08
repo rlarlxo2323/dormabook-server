@@ -48,7 +48,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.cors().and().csrf().disable().authorizeRequests()
                 .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
                 // login 없이 접근 허용 하는 url
-                .antMatchers("/api/**").permitAll() // 서버 올릴 때 변경 "/api/auth/**"
+                .antMatchers("/api/auth/**").permitAll() // 서버 올릴 때 변경 "/api/auth/**"
                 // '/admin'의 경우 ADMIN 권한이 있는 사용자만 접근이 가능
                 .antMatchers("/api/admin").hasRole("ADMIN")
                 // 그 외 모든 요청은 인증과정 필요
