@@ -8,9 +8,7 @@ import com.dormabook.service.bookImage.BookImageService;
 import com.dormabook.service.member.MemberService;
 import com.dormabook.security.JwtTokenProvider;
 import com.dormabook.service.post.PostService;
-import com.dormabook.web.dto.bookImage.BookImageResponseDto;
 import com.dormabook.web.dto.bookImage.BookImageSaveRequestDto;
-import com.dormabook.web.dto.mentorTranscript.MentorTranscriptResponseDto;
 import com.dormabook.web.dto.mentorTranscript.MentorTranscriptSaveRequestDto;
 import com.dormabook.web.dto.post.*;
 import lombok.RequiredArgsConstructor;
@@ -72,52 +70,71 @@ public class PostController {
         Post p = postService.findByMenteePost(postNo);
         return p;
     }
+    @GetMapping("/mento_post")
+    public GetPostClassResponse findByPostClass(@RequestParam("postNo")Long postNo){
+        return postService.findByPostClass(postNo);
+    }
 
+    //멘티 게시글 작성
+    @PostMapping(value = "/mentee_post/upload/post")
+    public void menteePostUpload(@RequestPart("data") UploadPostRequestDto dto) {
+        Optional<Member> member = memberService.getInfo(dto.getMemberId());
+        PostSaveRequestDto saveDto = new PostSaveRequestDto(member.get(), dto.getPostSubject(), dto.getPostRole(), dto.getPostTitle(), dto.getPostBookTitle(), dto.getPostContent());
+        postService.save(saveDto);
+
+    }
+
+    //멘토 게시글 작성
     @PostMapping(value = "/mento_post/upload/post", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
-    public String mentoPostUpload(@RequestPart UploadPostRequestDto dto,
-                                     @RequestPart("file") MultipartFile file,
-                                  @RequestPart("file2") MultipartFile file2) {
+    public String mentoPostUpload(@RequestPart(value = "data") UploadPostRequestDto dto,
+                                  @RequestPart(value = "file", required = false) MultipartFile file,
+                                  @RequestPart(value = "file2") MultipartFile file2) {
         Optional<Member> member = memberService.getInfo(dto.getMemberId());
         PostSaveRequestDto saveDto = new PostSaveRequestDto(member.get(), dto.getPostSubject(), dto.getPostRole(), dto.getPostTitle(), dto.getPostBookTitle(), dto.getPostContent());
         PostResponseDto info = postService.save(saveDto);
-        Optional<Post> post = postService.getPostNo(info.getPostNo());  //게시글 저장 후 게시글 No뽑아옥
-
-        String bookSaveImageName = postService.mentoPostUpload(file);
-        String imageName = file.getOriginalFilename();
-        String imageRoute = postFileStorageProperties.getUploadDir();
-
+        Optional<Post> post = postService.getPostNo(info.getPostNo());  //게시글 저장 후 게시글No 뽑아오기
         Post postNo = post.get();
 
-        BookImageSaveRequestDto bookImageSaveRequestDto = BookImageSaveRequestDto.builder() //BookImage DB 저장
-                .bookimageName(imageName)
-                .bookimageRoute(imageRoute)
-                .bookSaveimagename(bookSaveImageName)
-                .post(postNo)
-                .build();
+        if (file != null) {
+            String bookSaveImageName = postService.mentoPostUpload(file);
+            String imageName = file.getOriginalFilename();
+            String imageRoute = postFileStorageProperties.getUploadDir();
 
-        BookImageResponseDto responseDto = bookImageService.save(bookImageSaveRequestDto); //BookImage DB 저장
+            BookImageSaveRequestDto bookImageSaveRequestDto = BookImageSaveRequestDto.builder() //BookImage DB 저장
+                    .bookimageName(imageName)
+                    .bookimageRoute(imageRoute)
+                    .bookSaveimagename(bookSaveImageName)
+                    .post(postNo)
+                    .build();
 
+            bookImageService.save(bookImageSaveRequestDto); //BookImage DB 저장
 
-        String mentoSaveImageName = postService.mentoPostUpload(file2);
-        String mentoImageName = file.getOriginalFilename();
-        String mentoImageRoute = postFileStorageProperties.getUploadDir();
+        }
+        if (file2 != null) {
+            String mentoSaveImageName = postService.mentoPostUpload(file2);
+            String mentoImageName = file2.getOriginalFilename();
+            String mentoImageRoute = postFileStorageProperties.getUploadDir2();
 
-        MentorTranscriptSaveRequestDto mentorTranscriptSaveRequestDto = MentorTranscriptSaveRequestDto.builder()
-                .mentoImageName(mentoImageName)
-                .mentoImageRoute(mentoImageRoute)
-                .mentoSaveImageName(mentoSaveImageName)
-                .post(postNo)
-                .build();
+            MentorTranscriptSaveRequestDto mentorTranscriptSaveRequestDto = MentorTranscriptSaveRequestDto.builder()
+                    .mentoImageName(mentoImageName)
+                    .mentoImageRoute(mentoImageRoute)
+                    .mentoSaveImageName(mentoSaveImageName)
+                    .post(postNo)
+                    .build();
 
-        MentorTranscriptResponseDto responseDto2 = mentorTranscriptService.save(mentorTranscriptSaveRequestDto);
+            mentorTranscriptService.save(mentorTranscriptSaveRequestDto);
+            String ok = "게시글 작성 완료";
+            return ok;
+        } else {
+            String ok = "게시글 작성 오류";
+            return ok;
+        }
 
-        String test = responseDto.getBookImageRoute();
-        String test2 = responseDto2.getMentoSaveImageName();
-        return test+" + 경로에 이미지 저장됨 \n" +test2 + "경로에 성적증명서 저장됨";
     }
 
+
     @GetMapping("/community/mypage/postlist")
-    public List<PostListResponseDto> findByPostList(HttpServletRequest request){
+    public List<PostListResponseDto> findByPostList(HttpServletRequest request) {
 
         String jwt = jwtTokenProvider.resolveToken(request);
         val jwtToken = jwt.substring(7);
@@ -128,7 +145,7 @@ public class PostController {
     }
 
     @GetMapping("/community/mypage/classlist")
-    public List<GetClassListResponse> findByClassList(HttpServletRequest request){
+    public List<GetClassListResponse> findByClassList(HttpServletRequest request) {
 
         String jwt = jwtTokenProvider.resolveToken(request);
         val jwtToken = jwt.substring(7);
@@ -137,4 +154,5 @@ public class PostController {
 
         return postService.findByIdClassList(userId);
     }
+
 }

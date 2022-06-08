@@ -1,5 +1,6 @@
 package com.dormabook.domain.post;
 
+import com.dormabook.web.dto.post.GetPostClassResponse;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -31,5 +32,12 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     Post findByMenteePost(@Param("postNo")Long postNo);
 
 
-
+    //멘토 게시글 단건 조회
+    @Query(nativeQuery = true,value = "select p.post_title as postTitle, p.post_content as postContent, p.post_created_at as postCreatedAt, p.post_match_state as postMatchState,\n" +
+            "       m.member_name as memberName, b.book_saveimagename as bookSaveimagename, b.bookimage_route as bookimageRoute\n" +
+            "from post as p\n" +
+            "    join member m on p.member_id = m.member_id\n" +
+            "    join book_image b on p.post_no = b.post_no\n" +
+            "where p.post_no=:postNo")
+    GetPostClassResponse findByPostClass(@Param("postNo")Long postNo);
 }

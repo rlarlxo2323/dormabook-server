@@ -106,6 +106,12 @@ public class PostService {
                 .collect(Collectors.toList());
     }
 
+    //postNo와 postRole로 게시글 정보 불러오기 -> 멘토게시글인지 멘티게시글인지 구별
+    public GetPostClassResponse findByPostClass(Long postNo){
+        return postRepository.findByPostClass(postNo);
+    }
+
+
     public List<PostListResponseDto> findByRolePostList(String postRule) {
         return postRepository.findByRolePostList(postRule)
                 .stream()
@@ -134,4 +140,6 @@ public class PostService {
     public String findByIdJwt(String jwt){
         return jwtTokenProvider.getAuthentication(jwt).getName();
     }
+
+
 }

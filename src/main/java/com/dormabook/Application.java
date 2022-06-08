@@ -29,6 +29,7 @@ public class Application extends SpringBootServletInitializer {
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**").allowedOrigins("https://dormabook.shop"); //서버 올릴 때 변경
 //                registry.addMapping("/**").allowedOrigins("http://localhost:63342");
+                //https://dormabook.shop
             }
         };
     }

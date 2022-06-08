@@ -13,11 +13,13 @@ public class PostListResponseDto {
     private String postTitle;
     private int postMatchState;
     private Timestamp postCreatedAt;
+    private String postRole;
 
     public PostListResponseDto(Post entity) {
         this.postNo = entity.getPostNo();
         this.postTitle = entity.getPostTitle();
         this.postMatchState = entity.getPostMatchState();
         this.postCreatedAt = entity.getPostCreatedAt();
+        this.postRole = entity.getPostRole();
     }
 }
