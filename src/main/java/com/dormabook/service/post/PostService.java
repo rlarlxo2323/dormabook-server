@@ -134,4 +134,8 @@ public class PostService {
     public String findByIdJwt(String jwt){
         return jwtTokenProvider.getAuthentication(jwt).getName();
     }
+
+    public List<CommunityProfileResDto> getProfile(String userId) {
+        return postRepository.countPost(userId);
+    }
 }

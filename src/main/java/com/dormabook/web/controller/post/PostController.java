@@ -137,4 +137,14 @@ public class PostController {
 
         return postService.findByIdClassList(userId);
     }
+
+    @GetMapping("/community/profile")
+    public List<CommunityProfileResDto> getProfile(HttpServletRequest request) {
+        String jwt = jwtTokenProvider.resolveToken(request);
+        val jwtToken = jwt.substring(7);
+
+        String userId = postService.findByIdJwt(jwtToken);
+
+        return postService.getProfile(userId);
+    }
 }
