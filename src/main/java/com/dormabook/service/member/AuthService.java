@@ -5,6 +5,7 @@ import com.dormabook.domain.member.MemberRepository;
 import com.dormabook.security.JwtTokenProvider;
 import com.dormabook.security.MemberDetailsImpl;
 import com.dormabook.web.dto.member.*;
+import com.dormabook.web.dto.post.RequestIntroDto;
 import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -67,6 +68,11 @@ public class AuthService {
         String encodePwd = passwordEncoder.encode(request.getMemberPwd());
 
         return memberRepository.modifyPwById(request.getMemberId(), encodePwd);
+    }
+
+    public int modifyByIntro(String userId, String introduce){
+
+        return memberRepository.modifyByIntro(userId, introduce);
     }
 
     public JwtResponseDto login(JwtRequestDto request) throws Exception {
