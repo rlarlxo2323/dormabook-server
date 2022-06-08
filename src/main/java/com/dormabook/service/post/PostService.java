@@ -3,7 +3,6 @@ package com.dormabook.service.post;
 import com.dormabook.domain.post.Post;
 import com.dormabook.domain.post.PostFileStorageProperties;
 import com.dormabook.domain.post.PostRepository;
-import com.dormabook.domain.team.TeamRepository;
 import com.dormabook.security.JwtTokenProvider;
 import com.dormabook.web.dto.post.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,17 +29,14 @@ public class PostService {
 
     private final PostRepository postRepository;
     private final Path fileStorageLocation;
-    private final TeamRepository teamRepository;
+    private final JwtTokenProvider jwtTokenProvider;
 
     @Autowired
-    JwtTokenProvider jwtTokenProvider;
-
-    @Autowired
-    public PostService(PostFileStorageProperties postFileStorageProperties, PostRepository postRepository, TeamRepository teamRepository) {
+    public PostService(PostFileStorageProperties postFileStorageProperties, PostRepository postRepository, JwtTokenProvider jwtTokenProvider) {
         this.postRepository = postRepository;
         this.fileStorageLocation = Paths.get(postFileStorageProperties.getUploadDir())
                 .toAbsolutePath().normalize();
-        this.teamRepository = teamRepository;
+        this.jwtTokenProvider = jwtTokenProvider;
 
         try {
             Files.createDirectories(this.fileStorageLocation);
@@ -132,10 +128,6 @@ public class PostService {
                 .collect(Collectors.toList());
     }
 
-    public List<GetClassListResponse> findByIdClassList(String userId){
-
-        return teamRepository.findByIdClassList(userId);
-    }
 
     public String findByIdJwt(String jwt){
         return jwtTokenProvider.getAuthentication(jwt).getName();

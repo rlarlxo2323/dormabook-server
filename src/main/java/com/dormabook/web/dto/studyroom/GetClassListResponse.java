@@ -1,4 +1,4 @@
-package com.dormabook.web.dto.post;
+package com.dormabook.web.dto.studyroom;
 
 public interface GetClassListResponse {
     String getMemberId();

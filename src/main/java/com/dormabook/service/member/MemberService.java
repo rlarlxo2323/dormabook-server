@@ -17,14 +17,4 @@ public class MemberService {
     public Optional<Member> getInfo(String id){
         return memberRepository.findById(id);
     }
-//    //사용자 로그인
-//    public MemberResponseDto findByMemberid(String memberId, String memberPwd){
-//        Member entity = memberRepository.findById(memberId)
-//                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 아이디입니다."));
-//
-//        if(!entity.getMemberPwd().equals(memberPwd)){
-//            return false;
-//        }
-//        return new MemberResponseDto(entity);
-//    }
 }
