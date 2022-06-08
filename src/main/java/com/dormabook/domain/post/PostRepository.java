@@ -1,6 +1,7 @@
 package com.dormabook.domain.post;
 
 import com.dormabook.web.dto.post.GetPostClassResponse;
+import com.dormabook.web.dto.post.CommunityProfileResDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -40,4 +41,14 @@ public interface PostRepository extends JpaRepository<Post, Long> {
             "    join book_image b on p.post_no = b.post_no\n" +
             "where p.post_no=:postNo")
     GetPostClassResponse findByPostClass(@Param("postNo")Long postNo);
+
+    @Query(nativeQuery = true,value = "(select count(*) as 'count' from post where member_id =:userId)\n" +
+                                    "    UNION\n" +
+                                    "    (select count(*) as 'count'\n" +
+                                    "     from application a\n" +
+                                    "              join post p on a.post_no = p.post_no\n" +
+                                    "     where member_id =:userId\n" +
+                                    "       and a.application_acpt = 0)")
+    List<CommunityProfileResDto> countPost(@Param("userId")String userId);
+
 }
