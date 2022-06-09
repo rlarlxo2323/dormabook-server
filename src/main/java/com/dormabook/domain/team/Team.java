@@ -35,7 +35,7 @@ public class Team {
     private String teamSubject;
 
     @Builder
-    public Team(Long teamNo, String teamMentorid, String teamMenteeid, String teamBooktitle, String teamSubject) {
+    public Team(Long teamNo, String teamBooktitle, String teamMenteeid, String teamMentorid, String teamSubject) {
         this.teamNo = teamNo;
         this.teamMentorid = teamMentorid;
         this.teamMenteeid = teamMenteeid;
