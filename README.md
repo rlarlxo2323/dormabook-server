@@ -1,4 +1,4 @@
-# 책을 통한 동의대학교 멘토-멘티 플랫폼 “도르마북”
+# 책을 통한 멘토-멘티 플랫폼 “도르마북”
 
 **Project Repositories:**  
 - [커뮤니티 프론트](https://github.com/rlarlxo2323/dormabook-front)
