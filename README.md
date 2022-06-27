@@ -1,9 +1,9 @@
 # 책을 통한 동의대학교 멘토-멘티 플랫폼 “도르마북”
 
 **Project Repositories:**  
-- [커뮤니티 프론트](https://github.com/ads0070/dormabook-front)
-- [커뮤니티 백엔드(*)](https://github.com/ads0070/dormabook-server)
-- [학습실](https://github.com/ads0070/dormabook-webRTC)
+- [커뮤니티 프론트](https://github.com/rlarlxo2323/dormabook-front)
+- [커뮤니티 백엔드(*)](https://github.com/rlarlxo2323/dormabook-server)
+- [학습실](https://github.com/rlarlxo2323/dormabook-webRTC)
 
 ## 목차
 1. [개요](#1-개요)
