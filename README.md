@@ -65,28 +65,32 @@ QR코드를 사용한 주문 및 결제 방식은 현대 사회에서 널리 보
 
 ## 설계
 ### 디자인 설계
-1. 공통기능  
-![공통기능](image/공통기능.png)
-2. 사용자 기능  
-![사용자기능](image/사용자기능.png)
-3. 가맹점 기능  
-![가맹점기능](image/가맹점기능.png)
+1. 홈 화면 및 로그인 관련 기능  
+![홈](rdm-image/홈화면.png)
+
+2. 커뮤니티 기능
+![커뮤니티기능](rdm-image/커뮤니티.png)
+
+3. 마이페이지 기능
+![마이페이지기능](rdm-image/마이페이지.png)
+
+4. 학습실 기능
+![마이페이지기능](rdm-image/스터디룸.png)
 
 ### 서버 아키텍쳐
-![서버 아키텍쳐](image/서버아키텍쳐.png)
+#### 전체 서버 아키텍처
+![서버 아키텍쳐](rdm-image/서버아키텍처.png)
+
+#### WebRTC 서버 아키텍처
+![서버 아키텍쳐](rdm-image/webrtc.png)
+
 ### DB 설계
-![DB설계](image/DB설계.png)
+#### 홈, 커뮤니티 관련 ERD
+![DB설계](rdm-image/홈ERD.png)
 
+#### 학습실 관련 ERD
+![DB설계](rdm-image/학습실ERD.png)
 
-## 실행 화면
-### 로그인
-![로그인](image/로그인.png)
-
-### 사용자
-![사용자](image/사용자.png)
-
-### 가맹점
-![가맹점](image/가맹점.png)
 
 ## 시연 영상 및 발표 영상
 [![Video Label](https://img.youtube.com/vi/F9T6PEUqbiA/0.jpg)](https://youtu.be/F9T6PEUqbiA)  
@@ -94,12 +98,8 @@ QR코드를 사용한 주문 및 결제 방식은 현대 사회에서 널리 보
 
 ## Contributors
 
-This project exists thanks to all the people who [contribute](https://github.com/jsb12302/android/graphs/contributors).
-
 <a href="https://github.com/Bonyeong1998">
 <img src="https://avatars.githubusercontent.com/u/73810809?v=4" height="50" alt="Bonyeong1998"/></a>
-<a href="https://github.com/jsb12302">
-<img src="https://avatars.githubusercontent.com/u/73890228?v=4" height="50" alt="jsb12302"/></a>
 <a href="https://github.com/rlarlxo2323">
 <img src="https://avatars.githubusercontent.com/u/81959996?v=4" height="50" alt="rlarlxo2323"/></a>
 <a href="https://github.com/ads0070">
